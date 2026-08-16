@@ -1,0 +1,28 @@
+cmake_minimum_required(VERSION 3.16)
+project(ProjectName LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDART 17)
+set(CMAKE_CXX_STANDART_REQUIRED ON)
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG   "${CMAKE_SOURCE_DIR}/bin/debug")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_SOURCE_DIR}/bin/release")
+
+add_executable(TargetName src/main.cpp)
+
+# For CMake packages
+# set(CMAKE_PREFIX_PATH "<package_path1>;<package2_path>")
+# find_package(<package_name> REQUIRED COMPONENTS <package_comp1> <package_comp2>)
+
+# target_include_directories(TargetName PRIVATE include)
+# target_link_libraries(TargetName PRIVATE <package_name>::<package_comp1> <package_name>::<package_comp2>)
+
+# For raw libraries
+# target_include_directories(TargetName PRIVATE include)
+# target_link_directories(TargetName PRIVATE lib)
+# target_link_libraries(TargetName PRIVATE lib1 lib2 lib3)
+
+
+target_compile_options(TargetName PRIVATE 
+	$<$<CONFIG:Debug>:-g -O0 -Wall>
+	$<$<CONFIG:Release>:-O3 -s>
+)
